@@ -1,0 +1,52 @@
+"use client";
+import { useState } from "react";
+
+const templates = [
+  { id: "calc", name: "Kalkulator Pintar", icon: "🧮" },
+  { id: "weather", name: "Cuaca Hari Ini", icon: "🌤️" },
+  { id: "game", name: "Game Ringan", icon: "🎮" },
+  { id: "cleaner", name: "Pembersih HP", icon: "🧹" },
+];
+
+export default function GenerateAPKPage() {
+  const [selected, setSelected] = useState(templates[0].id);
+  const [loading, setLoading] = useState(false);
+
+  const handleGenerate = () => {
+    setLoading(true);
+    // Simulasi loading
+    setTimeout(() => {
+      alert("APK berhasil dibuat! (Simulasi)");
+      setLoading(false);
+    }, 2000);
+  };
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6">🔨 APK Builder</h2>
+      <p className="text-gray-400 mb-8">Pilih template penyamaran, otomatis inject ID kamu.</p>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {templates.map((t) => (
+          <div
+            key={t.id}
+            onClick={() => setSelected(t.id)}
+            className={`p-6 bg-gray-900 border rounded-lg cursor-pointer text-center transition ${
+              selected === t.id ? "border-cyan-500 bg-gray-800" : "border-gray-800 hover:border-gray-600"
+            }`}
+          >
+            <div className="text-3xl mb-2">{t.icon}</div>
+            <div className="text-sm">{t.name}</div>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={handleGenerate}
+        disabled={loading}
+        className="px-8 py-3 bg-cyan-600 hover:bg-cyan-700 disabled:bg-gray-700 text-white font-semibold rounded transition"
+      >
+        {loading ? "Compiling..." : "🔥 Build APK (Simulasi)"}
+      </button>
+      <p className="text-gray-600 text-xs mt-4">Fitur full hanya tersedia di environment khusus.</p>
+    </div>
+  );
+}
